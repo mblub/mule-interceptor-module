@@ -1,0 +1,33 @@
+package org.mule.modules.interceptor.matchers;
+
+/**
+ * <p>
+ *     Equality matcher. It compares using the equal method of Object
+ * </p>
+ *
+ * Usage: <code>new EqMatcher("desired").match("desired");</code> will return true.
+ *
+ * @author Federico, Fernando
+ * @since 3.3.2
+ */
+public class EqMatcher implements Matcher{
+    /**
+     * <p>The expected object</p>
+     */
+    private Object expected;
+
+    public EqMatcher(Object expected) {
+        this.expected = expected;
+    }
+
+    /**
+     *  @see Matcher#match(Object)
+     */
+    @Override
+    public boolean match(Object o) {
+        if ( o == null ){
+            return false;
+        }
+        return o.equals(expected);
+    }
+}
