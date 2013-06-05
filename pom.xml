@@ -7,10 +7,10 @@
 
     <artifactId>mule-interceptor-module</artifactId>
     <groupId>org.mule.modules</groupId>
-    <version>3.4-M3-SNAPSHOT</version>
+    <version>3.4-M4-SNAPSHOT</version>
 
     <properties>
-        <mule.version>3.4.0-RC4</mule.version>
+        <mule.version>3.4.0</mule.version>
         <junit.version>4.8.2</junit.version>
         <mockito.version>1.8.2</mockito.version>
         <jdk.version>1.6</jdk.version>
@@ -60,5 +60,16 @@
             </plugin>
         </plugins>
     </build>
-
+  <distributionManagement>
+        <repository>
+            <id>mulesoft-releases</id>
+            <name>MuleForge Snapshot Repository</name>
+            <url>http://repository.mulesoft.org/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>mulesoft-snapshots</id>
+            <name>MuleForge Repository</name>
+            <url>https://repository.mulesoft.org/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
