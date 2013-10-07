@@ -28,10 +28,17 @@ public abstract class AbstractMessageProcessorInterceptor  implements MethodInte
     protected MessageProcessorId id;
     protected Map<String,String> attributes;
 
+    protected String methodName;
+
+    public AbstractMessageProcessorInterceptor(String methodName)
+    {
+        this.methodName = methodName;
+    }
+
     @Override
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
         Class<?> declaringClass = method.getDeclaringClass();
-        if ( MessageProcessor.class.isAssignableFrom(declaringClass) && method.getName().equals("process") )
+        if ( MessageProcessor.class.isAssignableFrom(declaringClass) && method.getName().equals(methodName) )
         {
             return process(obj,args,proxy);
         }
