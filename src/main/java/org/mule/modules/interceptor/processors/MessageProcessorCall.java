@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
 package org.mule.modules.interceptor.processors;
 
 import org.mule.api.construct.FlowConstruct;
@@ -8,24 +14,25 @@ import java.util.Map;
 
 /**
  * <p>
- *     The representation of a Message Processor call
+ * The representation of a Message Processor call
  * </p>
  *
- * @author Federico, Fernando
+ * @author Mulesoft Inc.
  * @version since 3.3.2
  */
-public class MessageProcessorCall {
+public class MessageProcessorCall
+{
 
     /**
      * <p>
-     *     The Id of the message processor
+     * The Id of the message processor
      * </p>
      */
     private MessageProcessorId messageProcessorId;
 
     /**
      * <p>
-     *     The xml attributes of the message processor with its object (the attribute resolution)
+     * The xml attributes of the message processor with its object (the attribute resolution)
      * </p>
      */
     private Map<String, Object> attributes = new HashMap<String, Object>();
@@ -33,59 +40,67 @@ public class MessageProcessorCall {
 
     /**
      * <p>
-     *     The flow Construct of the message processor, can be null
+     * The flow Construct of the message processor, can be null
      * </p>
      */
     private FlowConstruct flowConstruct;
 
 
-    public MessageProcessorCall(MessageProcessorId messageProcessorId) {
+    public MessageProcessorCall(MessageProcessorId messageProcessorId)
+    {
         this.messageProcessorId = messageProcessorId;
     }
 
-    public void setAttributes(Map<String, Object> attributes) {
+    public void setAttributes(Map<String, Object> attributes)
+    {
         this.attributes = attributes;
     }
 
-    public Map<String, Object> getAttributes() {
+    public Map<String, Object> getAttributes()
+    {
         return attributes;
     }
 
-    public MessageProcessorId getMessageProcessorId() {
+    public MessageProcessorId getMessageProcessorId()
+    {
         return messageProcessorId;
     }
 
     /**
      * <p>
-     *     Defines if this call is of a particular message processor
+     * Defines if this call is of a particular message processor
      * </p>
      *
-     * @param id
-     * <p>
+     * @param id <p>
      *           The id of the message processor
-     * </p>
+     *           </p>
      * @return true/false
      */
-    public boolean isCallOf(MessageProcessorId id) {
+    public boolean isCallOf(MessageProcessorId id)
+    {
         return this.messageProcessorId.equals(id);
     }
 
 
     /**
      * <p>
-     *     If the current call matches exactly with the call sent by parameter. Then it returns the number of attributes
-     *     of the current call, else returns -1
+     * If the current call matches exactly with the call sent by parameter. Then it returns the number of attributes
+     * of the current call, else returns -1
      * </p>
      *
      * @param call The Message processor call that we need to compare to.
      * @return The total number of matching attributes or -1
      */
-    public int matchingWeight(MessageProcessorCall call) {
-        if (messageProcessorId.equals(call.getMessageProcessorId())) {
+    public int matchingWeight(MessageProcessorCall call)
+    {
+        if (messageProcessorId.equals(call.getMessageProcessorId()))
+        {
 
             Map<String, Object> callAttributes = call.getAttributes();
-            for (Map.Entry<String, Object> myAttribute : attributes.entrySet()) {
-                if (!callHasAttribute(callAttributes, myAttribute)) {
+            for (Map.Entry<String, Object> myAttribute : attributes.entrySet())
+            {
+                if (!callHasAttribute(callAttributes, myAttribute))
+                {
                     return -1;
                 }
             }
@@ -95,16 +110,19 @@ public class MessageProcessorCall {
         return -1;
     }
 
-    private boolean callHasAttribute(Map<String, Object> callAttributes, Map.Entry<String, Object> myAttribute) {
+    private boolean callHasAttribute(Map<String, Object> callAttributes, Map.Entry<String, Object> myAttribute)
+    {
         String myAttributeKey = myAttribute.getKey();
         return callAttributes.containsKey(myAttributeKey) &&
-                matchAttributeValue(callAttributes.get(myAttributeKey), myAttribute.getValue());
+               matchAttributeValue(callAttributes.get(myAttributeKey), myAttribute.getValue());
     }
 
 
-    private boolean matchAttributeValue(Object value, Object matcher) {
+    private boolean matchAttributeValue(Object value, Object matcher)
+    {
 
-        if (matcher instanceof Matcher) {
+        if (matcher instanceof Matcher)
+        {
             return ((Matcher) matcher).match(value);
         }
 
@@ -112,11 +130,13 @@ public class MessageProcessorCall {
 
     }
 
-    public void setFlowConstruct(FlowConstruct flowConstruct) {
+    public void setFlowConstruct(FlowConstruct flowConstruct)
+    {
         this.flowConstruct = flowConstruct;
     }
 
-    public FlowConstruct getFlowConstruct() {
+    public FlowConstruct getFlowConstruct()
+    {
         return flowConstruct;
     }
 
