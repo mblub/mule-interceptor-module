@@ -6,7 +6,7 @@
  */
 package org.mule.modules.interceptor.spring;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -74,7 +74,7 @@ public class BeanFactoryMethodBuilder
         ConstructorArgumentValues constructorArgumentValues = beanDefinition.getConstructorArgumentValues();
 
         ConstructorArgumentValues values = new ConstructorArgumentValues();
-        List<ConstructorArgumentValues.ValueHolder> indexedArgumentValues = constructorArgumentValues.getGenericArgumentValues();
+        Map<Integer, ConstructorArgumentValues.ValueHolder> indexedArgumentValues = constructorArgumentValues.getIndexedArgumentValues();
 
         for (int i = 0; i < indexedArgumentValues.size(); i++)
         {
@@ -89,6 +89,5 @@ public class BeanFactoryMethodBuilder
 
         return beanDefinition;
     }
-
 }
 

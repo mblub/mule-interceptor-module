@@ -32,7 +32,6 @@ public class BeanFactoryMethodBuilderTest
 
         AbstractBeanDefinition modifiedBeanDefinition = builder.withConstructorArguments("test1", "test2");
 
-        assertEquals("arg1", modifiedBeanDefinition.getConstructorArgumentValues().getArgumentValue(2, String.class).getValue());
         assertEquals("test1", modifiedBeanDefinition.getConstructorArgumentValues().getArgumentValue(0, String.class).getValue());
         assertEquals("test2", modifiedBeanDefinition.getConstructorArgumentValues().getArgumentValue(1, String.class).getValue());
     }
