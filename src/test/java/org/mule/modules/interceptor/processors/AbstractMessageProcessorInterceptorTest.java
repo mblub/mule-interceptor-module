@@ -7,6 +7,7 @@
 package org.mule.modules.interceptor.processors;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -101,6 +102,56 @@ public class AbstractMessageProcessorInterceptorTest
         Map<String,Object> attrs = mpInterceptor.getAttributes(event);
 
         assertEquals("object", attrs.get("key"));
+    }
+
+    @Test
+    public void evaluateAttributesWithExpression()
+    {
+        when(event.getMuleContext()).thenReturn(context);
+        when(context.getExpressionManager()).thenReturn(expressionManager);
+        when(expressionManager.isExpression(anyString())).thenReturn(true);
+        when(expressionManager.parse(anyString(), any(MuleEvent.class))).thenReturn("object");
+
+        Object returnValue = new Object();
+        MessageProcessorInterceptor mpInterceptor = new MessageProcessorInterceptor(returnValue);
+        HashMap<String, String> attributes = new HashMap<String, String>();
+        attributes.put("key", "value");
+        mpInterceptor.setAttributes(attributes);
+
+        Map<String, Object> attrs = mpInterceptor.getAttributes(event);
+
+        assertEquals("object", attrs.get("key"));
+    }
+
+
+    @Test
+    public void evaluateAttributesWithFailure()
+    {
+        when(event.getMuleContext()).thenReturn(context);
+        when(context.getExpressionManager()).thenReturn(expressionManager);
+        when(expressionManager.isExpression(anyString())).thenReturn(false);
+
+        Object returnValue = new Object();
+        MessageProcessorInterceptor mpInterceptor = new MessageProcessorInterceptor(returnValue);
+        HashMap<String, String> attributes = new HashMap<String, String>();
+        attributes.put("key", "value");
+        mpInterceptor.setAttributes(attributes);
+
+        Map<String, Object> attrs = mpInterceptor.getAttributes(event);
+
+        assertEquals("value", attrs.get("key"));
+    }
+
+
+    @Test
+    public void testSetID()
+    {
+        MessageProcessorInterceptor interceptor = new MessageProcessorInterceptor(new Object());
+
+        MessageProcessorId id = new MessageProcessorId("name", "nsp");
+        interceptor.setId(id);
+
+        assertEquals(id, interceptor.id);
     }
 
     private static class MessageProcessorInterceptor extends AbstractMessageProcessorInterceptor
