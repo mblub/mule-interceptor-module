@@ -1,32 +1,39 @@
+/*
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
 package org.mule.modules.interceptor.processors;
 
 /**
  * <p>
- *     The representation of a Message Processor Id
+ * The representation of a Message Processor Id
  * </p>
  *
- * @author Federico, Fernando
+ * @author Mulesoft Inc.
  * @version since 3.3.2
  */
-public class MessageProcessorId {
+public class MessageProcessorId
+{
 
     /**
      * <p>
-     *     Utility method to extract namespace from full name
+     * Utility method to extract namespace from full name
      * </p>
      *
-     * @param fullName
-     * <p>
-     *     For example mule:logger
-     * </p>
-     * @return
-     * <p>
-     *     For example mule
-     * </p>
+     * @param fullName <p>
+     *                 For example mule:logger
+     *                 </p>
+     * @return <p>
+     *         For example mule
+     *         </p>
      */
-    public static String getNamespace(String fullName) {
+    public static String getNamespace(String fullName)
+    {
         String[] split = fullName.split(":");
-        if (split.length > 1) {
+        if (split.length > 1)
+        {
             return split[0];
         }
 
@@ -35,21 +42,21 @@ public class MessageProcessorId {
 
     /**
      * <p>
-     *     Utility method to extract name from full name
+     * Utility method to extract name from full name
      * </p>
      *
-     * @param fullName
-     * <p>
-     *     For example mule:logger
-     * </p>
-     * @return
-     * <p>
-     *     For example logger
-     * </p>
+     * @param fullName <p>
+     *                 For example mule:logger
+     *                 </p>
+     * @return <p>
+     *         For example logger
+     *         </p>
      */
-    public static String getName(String fullName) {
+    public static String getName(String fullName)
+    {
         String[] split = fullName.split(":");
-        if (split.length > 1) {
+        if (split.length > 1)
+        {
             return split[1];
         }
 
@@ -59,40 +66,46 @@ public class MessageProcessorId {
 
     /**
      * <p>
-     *     The Name of the message processor. For example, the name of jira:create-group is create-group
+     * The Name of the message processor. For example, the name of jira:create-group is create-group
      * </p>
      */
     private String name;
 
     /**
      * <p>
-     *     The namespace of the message processor. For example, the namespace of jira:create-group is jira
+     * The namespace of the message processor. For example, the namespace of jira:create-group is jira
      * </p>
      */
     private String namespace;
 
-    public MessageProcessorId(String name, String namespace) {
+    public MessageProcessorId(String name, String namespace)
+    {
         this.name = name;
         this.namespace = namespace;
     }
-    
-    public String getFullName(){
+
+    public String getFullName()
+    {
         return namespace + ":" + name;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public String getNamespace() {
+    public String getNamespace()
+    {
         return namespace;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if ( o instanceof MessageProcessorId){
+    public boolean equals(Object o)
+    {
+        if (o instanceof MessageProcessorId)
+        {
             MessageProcessorId mpId = (MessageProcessorId) o;
-            
+
             return mpId.getName().equals(name) && mpId.getNamespace().equals(namespace);
         }
 
@@ -100,7 +113,8 @@ public class MessageProcessorId {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return getFullName().hashCode();
     }
 }
