@@ -78,7 +78,7 @@ public class AbstractMessageProcessorInterceptorTest
         attributes.put("key", "value");
         mpInterceptor.setAttributes(attributes);
 
-        Map<String,Object> attrs = mpInterceptor.getAttributes(event);
+        Map<String, Object> attrs = mpInterceptor.getAttributes(event);
 
         assertEquals("value", attrs.get("key"));
     }
@@ -98,7 +98,7 @@ public class AbstractMessageProcessorInterceptorTest
         attributes.put("key", "value");
         mpInterceptor.setAttributes(attributes);
 
-        Map<String,Object> attrs = mpInterceptor.getAttributes(event);
+        Map<String, Object> attrs = mpInterceptor.getAttributes(event);
 
         assertEquals("object", attrs.get("key"));
     }
@@ -110,6 +110,7 @@ public class AbstractMessageProcessorInterceptorTest
 
         private MessageProcessorInterceptor(Object returnValue)
         {
+            super("process");
             this.returnValue = returnValue;
         }
 
