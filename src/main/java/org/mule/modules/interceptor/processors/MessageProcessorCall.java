@@ -93,7 +93,7 @@ public class MessageProcessorCall
      */
     public int matchingWeight(MessageProcessorCall call)
     {
-        if (messageProcessorId.equals(call.getMessageProcessorId()))
+        if (messageProcessorId.getFullName().equals(call.getMessageProcessorId().getFullName()))
         {
 
             Map<String, Object> callAttributes = call.getAttributes();
