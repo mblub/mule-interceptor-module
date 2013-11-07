@@ -6,7 +6,6 @@
  */
 package org.mule.modules.interceptor.processors;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -82,26 +81,17 @@ public class MessageProcessorId
     private String namespace;
 
 
-    /**
-     * <p>
-     * A (potentially empty) set of attributes to match against
-     * </p>
-     */
-    private Map<String, Object> attributes;
-
 
     public MessageProcessorId(String name, String namespace)
     {
         this.name = name;
         this.namespace = namespace;
-        this.attributes = new HashMap<String, Object>();
     }
 
     public MessageProcessorId(String name, String namespace, Map<String, Object> attributes)
     {
         this.name = name;
         this.namespace = namespace;
-        this.attributes = new HashMap<String, Object>(attributes);
     }
 
     public String getFullName()
@@ -119,10 +109,6 @@ public class MessageProcessorId
         return namespace;
     }
 
-    public Map<String,Object> getAttributes() {
-        return attributes;
-    }
-
     @Override
     public boolean equals(Object o)
     {
@@ -130,7 +116,7 @@ public class MessageProcessorId
         {
             MessageProcessorId mpId = (MessageProcessorId) o;
 
-            return mpId.getName().equals(name) && mpId.getNamespace().equals(namespace) && mpId.getAttributes().equals(attributes);
+            return mpId.getName().equals(name) && mpId.getNamespace().equals(namespace);
         }
 
         return false;
