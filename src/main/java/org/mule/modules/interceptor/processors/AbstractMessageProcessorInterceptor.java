@@ -28,7 +28,7 @@ import org.apache.commons.lang.StringUtils;
  * </p>
  *
  * @author Mulesoft Inc.
- * @version since 3.3.2
+ * @since  3.3.2
  */
 public abstract class AbstractMessageProcessorInterceptor implements MethodInterceptor
 {

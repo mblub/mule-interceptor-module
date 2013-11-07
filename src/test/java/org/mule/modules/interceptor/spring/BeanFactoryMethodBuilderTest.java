@@ -35,4 +35,21 @@ public class BeanFactoryMethodBuilderTest
         assertEquals("test1", modifiedBeanDefinition.getConstructorArgumentValues().getArgumentValue(0, String.class).getValue());
         assertEquals("test2", modifiedBeanDefinition.getConstructorArgumentValues().getArgumentValue(1, String.class).getValue());
     }
+
+    @Test
+    public void addingNewConstructorParametersToExistingBeanDefinitionWithIndexedArguments()
+    {
+        RootBeanDefinition beanDefinition = new RootBeanDefinition();
+        ConstructorArgumentValues constructorArgumentValues = beanDefinition.getConstructorArgumentValues();
+
+        constructorArgumentValues.addIndexedArgumentValue(0,"arg1");
+        BeanFactoryMethodBuilder builder = new BeanFactoryMethodBuilder(beanDefinition, "factoryMethod", "factoryBean");
+
+        AbstractBeanDefinition modifiedBeanDefinition = builder.withConstructorArguments("test1", "test2");
+
+        assertEquals("test1", modifiedBeanDefinition.getConstructorArgumentValues().getArgumentValue(0, String.class).getValue());
+        assertEquals("test2", modifiedBeanDefinition.getConstructorArgumentValues().getArgumentValue(1, String.class).getValue());
+    }
+
+
 }

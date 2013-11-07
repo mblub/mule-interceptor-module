@@ -8,6 +8,7 @@ package org.mule.modules.interceptor.processors;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ import java.util.Map;
  * </p>
  *
  * @author Mulesoft Inc.
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class MessageProcessorManager
 {
@@ -53,8 +54,15 @@ public class MessageProcessorManager
      */
     public MessageProcessorBehavior getBetterMatchingBehavior(MessageProcessorCall messageProcessorCall)
     {
-        Map.Entry<Integer, MessageProcessorBehavior> bestMatchingBehavior = new AbstractMap.SimpleEntry<Integer, MessageProcessorBehavior>(0, null);
-        for (MessageProcessorBehavior behavior : behaviors)
+        return getBetterMatchingAction(messageProcessorCall, behaviors);
+    }
+
+
+    protected <T extends MessageProcessorCallAction> T getBetterMatchingAction(MessageProcessorCall messageProcessorCall,
+                                                                               Collection<T> actions)
+    {
+        Map.Entry<Integer, T> bestMatchingBehavior = new AbstractMap.SimpleEntry<Integer, T>(0, null);
+        for (T behavior : actions)
         {
             int matchingWeight = behavior.getMessageProcessorCall().matchingWeight(messageProcessorCall);
             if (matchingWeight >= 0 && matchingWeight >= bestMatchingBehavior.getKey())

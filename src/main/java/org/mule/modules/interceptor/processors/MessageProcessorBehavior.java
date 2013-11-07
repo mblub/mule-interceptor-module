@@ -15,17 +15,10 @@ import org.mule.api.MuleMessage;
  * </p>
  *
  * @author Mulesoft Inc.
- * @version since 3.3.2
+ * @since  3.3.2
  */
-public class MessageProcessorBehavior
+public class MessageProcessorBehavior extends MessageProcessorCallAction
 {
-
-    /**
-     * <p>
-     * The message processor call representation. When this call is executed then return returnMessage
-     * </p>
-     */
-    private MessageProcessorCall messageProcessorCall;
 
     /**
      * <p>
@@ -43,13 +36,13 @@ public class MessageProcessorBehavior
 
     public MessageProcessorBehavior(MessageProcessorCall messageProcessorCall, MuleMessage returnMuleMessage)
     {
-        this.messageProcessorCall = messageProcessorCall;
+        super(messageProcessorCall);
         this.returnMuleMessage = returnMuleMessage;
     }
 
     public MessageProcessorBehavior(MessageProcessorCall messageProcessorCall, Throwable exceptionToThrow)
     {
-        this.messageProcessorCall = messageProcessorCall;
+        super(messageProcessorCall);
         this.exceptionToThrow = exceptionToThrow;
     }
 
@@ -58,10 +51,7 @@ public class MessageProcessorBehavior
         return returnMuleMessage;
     }
 
-    public MessageProcessorCall getMessageProcessorCall()
-    {
-        return messageProcessorCall;
-    }
+
 
     public Throwable getExceptionToThrow()
     {

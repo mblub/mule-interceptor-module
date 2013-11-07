@@ -90,7 +90,7 @@
                     <check>
                         <branchRate>${cobertura.coverage}</branchRate>
                         <lineRate>${cobertura.coverage}</lineRate>
-                        <haltOnFailure>${cobertura.coverage}</haltOnFailure>
+                        <haltOnFailure>true</haltOnFailure>
                         <totalBranchRate>${cobertura.coverage}</totalBranchRate>
                         <totalLineRate>${cobertura.coverage}</totalLineRate>
                         <packageLineRate>${cobertura.coverage}</packageLineRate>

@@ -18,7 +18,7 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
  * </p>
  *
  * @author Mulesoft Inc.
- * @version since 3.3.2
+ * @since  3.3.2
  */
 public class BeanFactoryMethodBuilder
 {
